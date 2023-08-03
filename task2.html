@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task2</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 2. Створити об’єкт «Авто».</div>
+				</div>
+				<script>
+					class Auto {
+						constructor(brand, tankCapacity, numberOfLitersIn, seatsCount, peopleCount) {
+							this.brand = brand
+							this.tankCapacity = tankCapacity
+							this.numberOfLitersIn = numberOfLitersIn
+							this.seatsCount = seatsCount
+							this.peopleCount = peopleCount
+						}
+						refuelingTheCar(newLitesr) {
+							newLitesr += this.numberOfLitersIn
+							if (newLitesr > this.tankCapacity) {
+								let restLitters
+								let restOfLitters = newLitesr - this.tankCapacity
+								this.numberOfLitersIn = this.tankCapacity
+								return restOfLitters
+							} else {
+								this.numberOfLitersIn = newLitesr
+								return 0
+							}
+						}
+						outputNumbersOfPasangers() {
+							alert(`початкова кількість пасажирів ${this.peopleCount} : кількість мість ${this.seatsCount}`)
+						}
+						plusNewPassangers(newPassangers) {
+							this.peopleCount += newPassangers
+						}
+						getDisembarkedPassangersIfTheyAreTooMany() {
+							if (this.peopleCount > this.seatsCount) {
+								let disembarkedPassangers = this.peopleCount - this.seatsCount
+								this.peopleCount = this.seatsCount
+								return disembarkedPassangers
+							} else return 0
+						}
+					}
+					let auto = new Auto("Audi", 30, 15, 6, 3)
+					// 1) Заправка на вказану кількість літрів
+					let littersUserWantToFiilUp = parseInt(prompt("Заправте машину"))
+					let restLitters = auto.refuelingTheCar(littersUserWantToFiilUp)
+					// 2) Виведення кількості пасажирів
+					auto.outputNumbersOfPasangers()
+					// 3) Додавання пасажирів
+					let newPassangers = parseInt(prompt("введіть кількість нових пасажирів"))
+					auto.plusNewPassangers(newPassangers)
+					// 4) Висадка пасажирів
+					let disembarkedPassangers = auto.getDisembarkedPassangersIfTheyAreTooMany()
+					//=============
+					document.write(
+						`марка машини ${auto.brand} <br/> розмір бака ${auto.tankCapacity} <br/> кількісь літрів в баці ${auto.numberOfLitersIn} <br/> кількість мість ${auto.seatsCount} <br/> Кількісць пасажирів ${auto.peopleCount} <br/>`
+					)
+					if (disembarkedPassangers === 0) {
+						document.write("пасажирів не висаджували <br/>")
+					} else {
+						document.write(`висадили ${disembarkedPassangers} пасажирів  <br/>`)
+					}
+					if (restLitters === 0) {
+						document.write("Залишку літрів бензини нема  <br/>")
+					} else {
+						document.write(`залишилось ${restLitters}  літрів бензини`)
+					}
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task0</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">
+						Задача 0. Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому – функція для знаходження
+						добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+					</div>
+				</div>
+				<script>
+					"use strict"
+					class someNumbers {
+						constructor(numbersArr, minNum, maxNum) {
+							this.numbers = numbersArr
+							this.minNum = minNum
+							this.maxNum = maxNum
+						}
+						//функція сортування
+						getSortedArr = function () {
+							let prevLast = this.numbers.length - 2
+							for (let i = 0; i <= prevLast; i++) {
+								let minIndx = i
+								for (let j = i + 1; j < this.numbers.length; j++) {
+									if (this.numbers[j] < this.numbers[minIndx]) {
+										minIndx = j
+									}
+								}
+								if (minIndx !== i) {
+									let temp = this.numbers[i]
+									this.numbers[i] = this.numbers[minIndx]
+									this.numbers[minIndx] = temp
+								}
+							}
+							return this.numbers
+						}
+					}
+					//========================================
+					let obj1 = new someNumbers([1, 8, 1, 14, 7, 11], 1, 4)
+					//========================================
+					obj1.getSum = function () {
+						let sum = 0
+						let arr = this.getSortedArr()
+						// через редис було б коротше але вирішив фором
+						for (let i = this.minNum + 1; i < this.maxNum; i++) {
+							sum += arr[i]
+						}
+						return sum
+					}
+					//=====================================
+					let obj2 = new someNumbers([9, 8, 9, 6, 10, 3, 1], 2, 5)
+					obj2.getProduct = function () {
+						let product = 1
+						let arr = this.getSortedArr()
+						for (let i = this.minNum + 1; i < this.maxNum; i++) {
+							product *= arr[i]
+						}
+						return product
+					}
+					document.write(`функція знаходження суми у 1 обєкті    =  ${obj1.getSum()} <br/>`)
+					document.write(`функція знаходження суми у 2 обєкті   =  ${obj1.getSum.call(obj2)} <br/>`)
+					document.write(`функція знаходження добутку у 1 обєкті    =  ${obj2.getProduct.call(obj1)} <br/>`)
+					document.write(`функція знаходження добутку у 2 обєкті  =  ${obj2.getProduct()}`)
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

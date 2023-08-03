@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task4</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 4. Розробити клас Baner</div>
+				</div>
+				<script>
+					class Baner {
+						constructor() {
+							this.banners = [
+								{
+									bannerImage: `img/comfy.jpg"`,
+									bannerLink: `https://comfy.ua/`,
+								},
+								{
+									bannerImage: `img/foxtrot.jpg`,
+									bannerLink: `https://www.foxtrot.com.ua/`,
+								},
+								{
+									bannerImage: `img/moyo.jpg`,
+									bannerLink: `https://www.moyo.ua/`,
+								},
+								{
+									bannerImage: `img/rozetka.jpg`,
+									bannerLink: `https://rozetka.com.ua/`,
+								},
+							]
+						}
+						getRandomBanner() {
+							let minNum = 0
+							let maxNum = this.banners.length - 1
+							const randomNum = minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+							return randomNum
+						}
+						showBanner() {
+							let bannerNum = this.getRandomBanner()
+							document.write(`
+                     <div class="banner">
+                        <img class="banner__image" src="${this.banners[bannerNum].bannerImage}" alt="">
+                        <a class="banner__link" href="${this.banners[bannerNum].bannerLink}"></a>
+                        </div>
+                     `)
+						}
+					}
+					let banner = new Baner()
+					banner.showBanner()
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

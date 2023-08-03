@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task1</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 1. Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.</div>
+				</div>
+				<script>
+					class RangeWithRabits {
+						constructor(cellsCount, rabitcCount) {
+							this.cellsCount = cellsCount
+							this.rabitcCount = rabitcCount
+							this.field = this.fillField()
+						}
+						getRandomIndex() {
+							let minNum = 0
+							return minNum + Math.floor(Math.random() * this.cellsCount)
+						}
+						fillField() {
+							let arr = new Array(this.cellsCount).fill(0, 0)
+							let randIndx
+							for (let i = 0; i < this.rabitcCount; ) {
+								randIndx = this.getRandomIndex()
+								if (arr[randIndx] !== 1) {
+									arr[randIndx] = 1
+									i++
+								}
+							}
+							return arr
+						}
+						playGame() {
+							let targets = this.rabitcCount
+							while (confirm("стріляєм по зайцям ?")) {
+								let userShoot = parseInt(prompt(`введіть клітинку від 1  до ${this.cellsCount}`)) - 1
+								if (this.field[userShoot] === 1) {
+									alert("ви попали")
+									this.field[userShoot] = 0
+									targets--
+									if (targets === 0) {
+										alert("ви вбили всіх зайців ")
+										break
+									}
+									this.field[userShoot] === 0
+								} else alert("ви не  попали")
+							}
+						}
+					}
+					let rangeOne = new RangeWithRabits(5, 3)
+					rangeOne.playGame()
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task5</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 5. Розробити клас «Керівник танців»</div>
+				</div>
+				<script>
+					class CouplesForDancind {
+						constructor(boys, girls) {
+							this.boys = boys
+							this.girls = girls
+						}
+						randIndex(minNum, maxNum) {
+							maxNum -= 1
+							return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+						}
+						getBoy() {
+							let boyIndx = this.randIndex(0, this.boys.length)
+							return this.boys[boyIndx]
+						}
+						getGirl() {
+							let girlIndx = this.randIndex(0, this.girls.length)
+							return this.girls[girlIndx]
+						}
+						showDanceCouple() {
+							let boy = this.getBoy()
+							let girl = this.getGirl()
+
+							return `${boy} and ${girl}`
+						}
+						run(timeout) {
+							// не додумався я як зробити щоб пари не поворювались
+							let couplesCount = 5
+							let intervalId = setInterval(() => {
+								console.log(this.showDanceCouple())
+								couplesCount -= 1
+								if (couplesCount === 0) clearInterval(intervalId)
+							}, timeout)
+						}
+					}
+					let boys = ["Petro", "John"]
+					let girls = ["Mariya", "Sofia", "Tanya", "Lilia"]
+					let couplesForDancind = new CouplesForDancind(boys, girls)
+					couplesForDancind.run(5000)
+				</script>
+			</div>
+		</main>
+	</body>
+</html>
